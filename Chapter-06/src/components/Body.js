@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurantList } from "../config";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
 function filterData(searchText, restaurants) {
@@ -37,10 +38,10 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="search-container p-5 bg-pink-50 my-5">
         <input
           type="text"
-          className="search-input"
+          className="focus:bg-green-100 p-2 m-2"
           placeholder="Search for Restaurants"
           value={searchText}
           onChange={(e) => {
@@ -49,7 +50,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-btn"
+          className="p-2 m-2 bg-purple-600 text-white rounded-md"
           onClick={() => {
             const data = filterData(searchText, allrestaurants);
             setFilteredRestaurants(data);
@@ -59,14 +60,16 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="restaurant-list">
+      <div className="flex flex-wrap">
         {/* Added A functionality is the search item is not present then its show not found */}
         {filteredRestuarant.length === 0 ? (
           <p>No Restaurants found</p>
         ) : (
           filteredRestuarant.map((restaurant) => {
             return (
-              <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+              <Link to={'/restaurants/' + restaurant.data.id} key={restaurant.data.id}>
+              <RestaurantCard {...restaurant.data}  />
+              </Link>
             );
           })
         )}
