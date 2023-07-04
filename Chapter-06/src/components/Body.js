@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurantList } from "../config";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
@@ -16,7 +16,6 @@ const Body = () => {
   const [filteredRestuarant, setFilteredRestaurants] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [allrestaurants, setAllrestaurants] = useState([]);
-  console.log("render");
 
   useEffect(() => {
     getRestaurant();
@@ -38,7 +37,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container p-5 bg-pink-50 my-5">
+      <div className="search-container p-5 bg-pink-50 my-5 text-center">
         <input
           type="text"
           className="focus:bg-green-100 p-2 m-2"
